@@ -1,0 +1,58 @@
+{
+  "name": "react-native-layers",
+  "version": "0.1.0",
+  "description": "Layers for React Native",
+  "main": "./lib/esm/index.js",
+  "types": "./lib/esm/index.d.ts",
+  "scripts": {
+    "build": "yarn build:esm",
+    "build:esm": "tsc --noEmit false --outDir ./lib/esm --declaration true --module esnext",
+    "test": "jest",
+    "lint": "yarn ts:check && yarn es:check",
+    "es:check": "eslint ./src/**/* --ext .js,.jsx,.ts,.tsx",
+    "es:fix": "yarn es:check --fix",
+    "ts:check": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amensum/react-native-layers.git"
+  },
+  "author": "https://github.com/amensum",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/amensum/react-native-layers/issues"
+  },
+  "homepage": "https://github.com/amensum/react-native-layers",
+  "peerDependencies": {
+    "react": "17.0.1",
+    "react-native": "0.64.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/runtime": "^7.12.5",
+    "@react-native-community/eslint-config": "^2.0.0",
+    "@types/jest": "^26.0.23",
+    "@types/react-native": "^0.64.5",
+    "@types/react-test-renderer": "^16.9.2",
+    "babel-jest": "^26.6.3",
+    "eslint": "^7.14.0",
+    "jest": "^26.6.3",
+    "metro-react-native-babel-preset": "^0.64.0",
+    "react-test-renderer": "17.0.1",
+    "typescript": "^3.8.3"
+  },
+  "resolutions": {
+    "@types/react": "^17"
+  },
+  "jest": {
+    "preset": "react-native",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
+}
