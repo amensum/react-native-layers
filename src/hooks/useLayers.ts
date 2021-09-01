@@ -1,9 +1,11 @@
 import { useContext } from "react"
 import LayersContext from "../context"
-import { TLayersContext } from "../types"
+import { TCreateLayer, TRemoveLayer } from "../types"
 
-const useLayers: () => TLayersContext = () => {
-  return useContext(LayersContext)
+const useLayers: () => [TCreateLayer, TRemoveLayer] = () => {
+  const { create, remove } = useContext(LayersContext)
+
+  return [create, remove]
 }
 
 export default useLayers
