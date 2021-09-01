@@ -2,16 +2,23 @@ import React from "react"
 import { StyleProp, ViewStyle } from "react-native"
 
 export type TLayer = React.FC<{
-  style?: StyleProp<ViewStyle>,
+  id: string,
+  style: StyleProp<ViewStyle>,
+}>
+
+export type TLayerProvider = () => TLayer
+
+export type TLayers = React.FC<{
+  children: TLayerProvider,
 }>
 
 export type TLayersList = {
-  [key: string]: React.FC,
+  [key: string]: TLayerProvider,
 }
 
 export type TCreateLayer = (
   id: string,
-  component: React.FC,
+  getComponentFunc: TLayerProvider,
 ) => void
 
 export type TRemoveLayer = (

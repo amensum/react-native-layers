@@ -1,16 +1,19 @@
-import React, { useMemo, useState } from "react"
-import { TLayersContext, TLayersList } from "../types"
+import React, { useState, useMemo } from "react"
+import { StyleSheet } from "react-native"
+import { TLayers, TLayersContext, TLayersList } from "../types"
 import LayersContext from "../context"
 
-const Layers: React.FC = ({ children }) => {
-  const [list, setList] = useState<TLayersList>({})
+const Layers: TLayers = ({ children }) => {
+  const [list, setList] = useState<TLayersList>({
+    _base: children,
+  })
 
   const context: TLayersContext = useMemo(() => ({
     list,
-    create: (id, component) => {
+    create: (id, getComponentFunc) => {
       setList(prev => {
         const next = { ...prev }
-        next[id] = component
+        next[id] = getComponentFunc
         return next
       })
     },
@@ -25,14 +28,18 @@ const Layers: React.FC = ({ children }) => {
 
   return (
     <LayersContext.Provider value={context}>
-      {children}
       {Object.keys(list).map(id => {
-        const Component = list[id]
-
-        return <Component key={id}/>
+        const Layer = list[id]()
+        return <Layer id={id} key={id} style={styles.layer}/>
       })}
     </LayersContext.Provider>
   )
 }
+
+const styles = StyleSheet.create({
+  layer: {
+    position: "absolute",
+  },
+})
 
 export default Layers
