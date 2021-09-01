@@ -6,7 +6,7 @@ const Layers: React.FC = ({ children }) => {
   const [list, setList] = useState<TLayersList>({})
 
   const context: TLayersContext = useMemo(() => ({
-    list: list,
+    list,
     create: (id, component) => {
       setList(prev => {
         const next = { ...prev }
@@ -29,7 +29,7 @@ const Layers: React.FC = ({ children }) => {
       {Object.keys(list).map(id => {
         const Component = list[id]
 
-        return <Component key={id} />
+        return <Component key={id}/>
       })}
     </LayersContext.Provider>
   )
