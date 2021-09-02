@@ -1,14 +1,14 @@
-import React from "react"
+import { ComponentType } from "react"
 import { StyleProp, ViewStyle } from "react-native"
 
-export type TLayer = React.FC<{
+export type TLayer = ComponentType<{
   id: string,
   style: StyleProp<ViewStyle>,
 }>
 
 export type TLayerProvider = () => TLayer
 
-export type TLayers = React.FC<{
+export type TLayers = ComponentType<{
   children: TLayerProvider,
 }>
 
