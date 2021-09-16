@@ -1,6 +1,6 @@
 {
   "name": "react-native-layers",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Layers for React Native",
   "main": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",
@@ -18,14 +18,14 @@
     "url": "https://github.com/amensum/react-native-layers.git"
   },
   "author": "https://github.com/amensum",
-  "license": "UNLICENSED",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/amensum/react-native-layers/issues"
   },
   "homepage": "https://github.com/amensum/react-native-layers",
   "peerDependencies": {
-    "react": "17.0.1",
-    "react-native": "0.64.1"
+    "react": "^17.0.1",
+    "react-native": "^0.64.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
