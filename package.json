@@ -1,6 +1,6 @@
 {
   "name": "react-native-layers",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Layers for React Native",
   "keywords": ["react-native"],
   "main": "./lib/esm/index.js",
