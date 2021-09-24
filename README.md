@@ -1,5 +1,7 @@
 # react-native-layers
 [![version](https://img.shields.io/npm/v/react-native-layers.svg?style=flat-square&logo=npm)](https://npmjs.com/package/react-native-layers)
+[![license](https://img.shields.io/npm/l/react-native-layers.svg?style=flat-square&logo=npm)](https://npmjs.com/package/react-native-layers)
+[![downloads](https://img.shields.io/npm/dm/react-native-layers.svg?style=flat-square&logo=npm)](https://npmjs.com/package/react-native-layers)
 
 Layers for React Native.
 
