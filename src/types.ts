@@ -1,7 +1,7 @@
 import { ComponentType } from "react"
 import { StyleProp, ViewStyle } from "react-native"
 
-export type TLayer = ComponentType<{
+export type TLayer<P = {}> = ComponentType<P & {
   id: string,
   style: StyleProp<ViewStyle>,
 }>
