@@ -30,3 +30,10 @@ export type TLayersContext = {
   create: TCreateLayer,
   remove: TRemoveLayer,
 }
+
+export type TMakeLayerProvider = (
+  Layer: TLayer,
+  additionalProps?: {
+    [key: string]: any,
+  },
+) => TLayerProvider
