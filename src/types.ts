@@ -9,11 +9,11 @@ export type TLayer = ComponentType<{
 export type TLayerProvider = () => TLayer
 
 export type TLayers = ComponentType<{
-  children: TLayerProvider,
+  children: TLayersList,
 }>
 
 export type TLayersList = {
-  [key: string]: TLayerProvider,
+  [id: string]: TLayerProvider,
 }
 
 export type TCreateLayer = (

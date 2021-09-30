@@ -86,7 +86,9 @@ const BaseLayer: TLayer = () => {
 const App = () => {
   return (
     <Layers>
-      {() => BaseLayer}
+      {{
+        "_base": () => BaseLayer,
+      }}
     </Layers>
   )
 }

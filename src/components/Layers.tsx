@@ -4,9 +4,7 @@ import { TLayers, TLayersContext, TLayersList } from "../types"
 import LayersContext from "../context"
 
 const Layers: TLayers = ({ children }) => {
-  const [list, setList] = useState<TLayersList>({
-    _base: children,
-  })
+  const [list, setList] = useState<TLayersList>(children)
 
   const context: TLayersContext = useMemo(() => ({
     list,
