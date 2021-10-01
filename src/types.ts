@@ -1,24 +1,23 @@
 import { ComponentType } from "react"
 import { StyleProp, ViewStyle } from "react-native"
 
-export type TLayer<P = {}> = ComponentType<P & {
+export type TLayer<P = {}> = ComponentType<{
   id: string,
+  key: string,
   style: StyleProp<ViewStyle>,
-}>
-
-export type TLayerProvider = () => TLayer
+} & P>
 
 export type TLayers = ComponentType<{
   children: TLayersList,
 }>
 
 export type TLayersList = {
-  [id: string]: TLayerProvider,
+  [id: string]: TLayer,
 }
 
 export type TCreateLayer = (
   id: string,
-  getComponentFunc: TLayerProvider,
+  LayerComp: TLayer,
 ) => void
 
 export type TRemoveLayer = (
@@ -31,9 +30,7 @@ export type TLayersContext = {
   remove: TRemoveLayer,
 }
 
-export type TMakeLayerProvider = (
-  Layer: TLayer,
-  additionalProps?: {
-    [key: string]: any,
-  },
-) => TLayerProvider
+export type TMakeLayer = (
+  LayerComp: TLayer,
+  getPropsFunc?: <T> (props: T) => T,
+) => TLayer

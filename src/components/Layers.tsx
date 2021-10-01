@@ -8,10 +8,10 @@ const Layers: TLayers = ({ children }) => {
 
   const context: TLayersContext = useMemo(() => ({
     list,
-    create: (id, getComponentFunc) => {
+    create: (id, LayerComp) => {
       setList(prev => {
         const next = { ...prev }
-        next[id] = getComponentFunc
+        next[id] = LayerComp
         return next
       })
     },
@@ -26,10 +26,13 @@ const Layers: TLayers = ({ children }) => {
 
   return (
     <LayersContext.Provider value={context}>
-      {Object.keys(list).map(id => {
-        const Layer = list[id]()
-        return <Layer id={id} key={id} style={styles.layer}/>
-      })}
+      {
+        Object.keys(list).map(id => React.createElement(list[id], {
+          id: id,
+          key: id,
+          style: styles.layer,
+        }))
+      }
     </LayersContext.Provider>
   )
 }
