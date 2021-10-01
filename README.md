@@ -14,7 +14,7 @@ $ npm install react-native-layers
 ## Demo
 ![Demo](./demo/video.gif)
 ```javascript
-import React, { useMemo } from "react"
+import React, { useEffect, useState } from "react"
 import {
   SafeAreaView,
   StatusBar,
@@ -24,17 +24,25 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native"
-import { Layers, useLayers } from "react-native-layers"
+import { Layers, useLayers, makeLayer } from "react-native-layers"
 import { TLayer } from "react-native-layers/lib/esm/types"
-
-let layersCount = 0
 
 const LayerButton: React.FC = () => {
   const { create } = useLayers()
+  const [count, setCount] = useState<number>(0)
+
+  const onLoad = () => {
+    setCount(c => c + 1)
+  }
+
+  const onClose = () => {
+    setCount(c => c - 1)
+  }
 
   const onPressHandler = () => {
-    const layerID = Date.now().toString()
-    create(layerID, () => DemoLayer)
+    create("_added_" + count, makeLayer(DemoLayer, props => {
+      return { ...props, onLoad, onClose, count }
+    }))
   }
 
   return (
@@ -46,13 +54,29 @@ const LayerButton: React.FC = () => {
   )
 }
 
-const DemoLayer: TLayer = ({ id, style }) => {
+const DemoLayer: TLayer<{
+  count?: number,
+  onLoad?: () => void,
+  onClose?: () => void
+}> = ({
+  id,
+  style,
+  count = 0,
+  onLoad = () => {},
+  onClose = () => {},
+}) => {
   const { remove } = useLayers()
-  const number = useMemo(() => ++layersCount, [])
+
+  useEffect(() => {
+    onLoad()
+
+    return () => {
+      onClose()
+    }
+  }, [onClose, onLoad])
 
   const onPressHandler = () => {
     remove(id)
-    layersCount--
   }
 
   return (
@@ -62,12 +86,12 @@ const DemoLayer: TLayer = ({ id, style }) => {
         style,
         styles.demoLayer,
         {
-          right: 162 - (number * 24),
-          top: 196 + (number * 24),
+          right: 162 - (count * 24),
+          top: 196 + (count * 24),
         },
       ]}
     >
-      <Text>Layer №{number}</Text>
+      <Text>Layer №{count}</Text>
     </TouchableOpacity>
   )
 }
@@ -87,7 +111,7 @@ const App = () => {
   return (
     <Layers>
       {{
-        "_base": () => BaseLayer,
+        "_base_0": BaseLayer,
       }}
     </Layers>
   )
