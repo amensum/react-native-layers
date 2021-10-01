@@ -40,9 +40,9 @@ const LayerButton: React.FC = () => {
   }
 
   const onPressHandler = () => {
-    create("_added_" + count, makeLayer(DemoLayer, props => {
-      return { ...props, onLoad, onClose, count }
-    }))
+    const madeLayer = makeLayer(DemoLayer, props => ({ ...props, count, onLoad, onClose }))
+
+    create("_added_" + count, madeLayer)
   }
 
   return (
@@ -55,13 +55,13 @@ const LayerButton: React.FC = () => {
 }
 
 const DemoLayer: TLayer<{
-  count?: number,
+  count: number,
   onLoad?: () => void,
   onClose?: () => void
 }> = ({
   id,
   style,
-  count = 0,
+  count,
   onLoad = () => {},
   onClose = () => {},
 }) => {
