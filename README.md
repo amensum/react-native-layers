@@ -22,7 +22,7 @@ import {
   useColorScheme,
   View,
   Text,
-  TouchableOpacity,
+  Pressable,
 } from "react-native"
 import { Layers, useLayers, makeLayer } from "react-native-layers"
 import { TLayer } from "react-native-layers/lib/esm/types"
@@ -46,11 +46,11 @@ const LayerButton: React.FC = () => {
   }
 
   return (
-    <TouchableOpacity onPress={onPressHandler}>
+    <Pressable onPressIn={onPressHandler}>
       <View style={styles.layerButton}>
         <Text>New</Text>
       </View>
-    </TouchableOpacity>
+    </Pressable>
   )
 }
 
@@ -80,8 +80,8 @@ const DemoLayer: TLayer<{
   }
 
   return (
-    <TouchableOpacity
-      onPress={onPressHandler}
+    <Pressable
+      onPressIn={onPressHandler}
       style={[
         style,
         styles.demoLayer,
@@ -92,7 +92,7 @@ const DemoLayer: TLayer<{
       ]}
     >
       <Text>Layer №{count}</Text>
-    </TouchableOpacity>
+    </Pressable>
   )
 }
 
