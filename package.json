@@ -1,10 +1,13 @@
 {
   "name": "react-native-layers",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Layers for React Native",
   "keywords": ["react-native"],
   "main": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "build": "yarn build:esm",
     "build:esm": "tsc --noEmit false --outDir ./lib/esm --declaration true --module esnext",
@@ -28,8 +31,7 @@
     "immer": "^9.0.12"
   },
   "peerDependencies": {
-    "react": "^17.0.1",
-    "react-native": "^0.64.1"
+    "react": "^17.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
