@@ -1,5 +1,6 @@
-import Layers from "./components/Layers"
-import useLayers from "./hooks/useLayers"
-import makeLayer from "./utils/makeLayer"
+import Layers from "./components/Layers";
+import useLayers from "./hooks/useLayers";
 
-export { Layers, useLayers, makeLayer }
+export { Layers, useLayers };
+
+export * from "./types";

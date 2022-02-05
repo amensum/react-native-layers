@@ -1,12 +1,12 @@
-import { createContext } from "react"
-import { TLayersContext } from "./types"
+import { createContext } from "react";
+import { LayersContext } from "./types";
 
-const defaultContext: TLayersContext = {
+const defaultContext: LayersContext = {
   list: {},
-  create: () => {},
-  remove: () => {},
-}
+  add: () => {},
+  del: () => {},
+};
 
-const LayersContext = createContext(defaultContext)
+const ContextInst = createContext(defaultContext);
 
-export default LayersContext
+export default ContextInst;

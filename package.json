@@ -1,6 +1,6 @@
 {
   "name": "react-native-layers",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Layers for React Native",
   "keywords": ["react-native"],
   "main": "./lib/esm/index.js",
@@ -24,6 +24,9 @@
     "url": "https://github.com/amensum/react-native-layers/issues"
   },
   "homepage": "https://github.com/amensum/react-native-layers",
+  "dependencies": {
+    "immer": "^9.0.12"
+  },
   "peerDependencies": {
     "react": "^17.0.1",
     "react-native": "^0.64.1"

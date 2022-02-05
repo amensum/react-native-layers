@@ -1,38 +1,21 @@
-import { ComponentType } from "react"
-import { StyleProp, ViewStyle } from "react-native"
+import React from "react";
 
-export type TLayers = ComponentType<{
-  children: TLayersList,
-}>
+export type Component<P = {}> = React.ComponentType<P>
 
-export type TLayersList = {
-  [id: string]: TLayer<any>,
+export type LayerId = React.Key
+
+export type Layer<P = {}> = [Component<P>, P]
+
+export type LayerAddFunc = (layerId: LayerId, layer: Layer<any>) => void
+
+export type LayerDelFunc = (layerId: LayerId) => void
+
+export type LayersList = Record<LayerId, Layer<any>>
+
+export type LayersRenderer = Component<{ children: LayersList }>
+
+export interface LayersContext {
+  list: LayersList;
+  add: LayerAddFunc;
+  del: LayerDelFunc;
 }
-
-export type TLayerProps<P = {}> = {
-  id: string,
-  key: string,
-  style: StyleProp<ViewStyle>,
-} & P
-
-export type TLayer<P = {}> = ComponentType<TLayerProps<P>>
-
-export type TCreateLayer = <P>(
-  id: string,
-  LayerComp: TLayer<P>,
-) => void
-
-export type TRemoveLayer = (
-  id: string,
-) => void
-
-export type TLayersContext = {
-  list: TLayersList,
-  create: TCreateLayer,
-  remove: TRemoveLayer,
-}
-
-export type TMakeLayer = <P>(
-  LayerComp: TLayer<P>,
-  getPropsFunc?: (props: TLayerProps) => TLayerProps<P>,
-) => TLayer<P>

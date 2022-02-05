@@ -1,9 +1,9 @@
-import { useContext } from "react"
-import LayersContext from "../context"
-import { TLayersContext } from "../types"
+import { useContext } from "react";
+import ContextInst from "../context";
+import { LayersContext } from "../types";
 
-const useLayers: () => TLayersContext = () => {
-  return useContext(LayersContext)
-}
+const useLayers: () => LayersContext = () => {
+  return useContext(ContextInst);
+};
 
-export default useLayers
+export default useLayers;

@@ -1,46 +1,43 @@
-import React, { useState, useMemo } from "react"
-import { StyleSheet } from "react-native"
-import { TLayers, TLayersContext, TLayersList } from "../types"
-import LayersContext from "../context"
+import React from "react";
+import produce from "immer";
+import ContextInst from "../context";
+import { LayersContext, LayersRenderer } from "../types";
 
-const Layers: TLayers = ({ children }) => {
-  const [list, setList] = useState<TLayersList>(children)
+const Layers: LayersRenderer = ({ children }) => {
+  const [layersList, setLayersList] = React.useState(children);
 
-  const context: TLayersContext = useMemo(() => ({
-    list,
-    create: (id, LayerComp) => {
-      setList(prev => {
-        const next = { ...prev }
-        next[id] = LayerComp
-        return next
-      })
+  const context: LayersContext = React.useMemo(() => ({
+    list: layersList,
+    add: (layerId, layer) => {
+      setLayersList(
+        produce(draft => {
+          draft[layerId] = layer;
+        }),
+      );
     },
-    remove: (id) => {
-      setList(prev => {
-        const next = { ...prev }
-        delete next[id]
-        return next
-      })
+    del: (layerId) => {
+      setLayersList(
+        produce(draft => {
+          delete draft[layerId];
+        }),
+      );
     },
-  }), [list, setList])
+  }), [layersList, setLayersList]);
 
   return (
-    <LayersContext.Provider value={context}>
+    <ContextInst.Provider value={context}>
       {
-        Object.keys(list).map(id => React.createElement(list[id], {
-          id: id,
-          key: id,
-          style: styles.layer,
-        }))
+        Object
+          .keys(layersList)
+          .map(layerId => {
+            const Component = layersList[layerId][0];
+            const props = layersList[layerId][1];
+
+            return <Component key={layerId} {...props} />;
+          })
       }
-    </LayersContext.Provider>
-  )
-}
+    </ContextInst.Provider>
+  );
+};
 
-const styles = StyleSheet.create({
-  layer: {
-    position: "absolute",
-  },
-})
-
-export default Layers
+export default Layers;
