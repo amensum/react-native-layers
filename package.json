@@ -1,6 +1,6 @@
 {
   "name": "react-native-layers",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "Layers for React Native",
   "keywords": [
     "react-native",
@@ -30,9 +30,6 @@
     "url": "https://github.com/amensum/react-native-layers/issues"
   },
   "homepage": "https://github.com/amensum/react-native-layers",
-  "dependencies": {
-    "immer": "^9.0.12"
-  },
   "peerDependencies": {
     "react": "^17.0.1"
   },
