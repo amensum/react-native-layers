@@ -20,12 +20,49 @@ Using yarn:
 $ yarn add react-native-layers
 ```
 
-## Demo
+## Preview
 
 ![Demo](./demo/video.gif)
 
-## Usage
+## Guide
 
-```javascript
-// TODO
+Add initial layer (or layers):
+
+```tsx
+import { Layer, Layers } from "react-native-layers";
+import BaseComponent from "./BaseComponent";
+
+const ExampleApp = () => {
+  return (
+    <Layers>
+      <Layer id={"_base"} component={BaseComponent} props={{}}/>
+    </Layers>
+  );
+};
+
+export default ExampleApp;
+```
+
+Add new layer dynamically:
+
+```tsx
+import { View, Button } from "react-native";
+import { useLayers } from "react-native-layers";
+import ModalComponent from "./ModalComponent";
+
+const ExampleScreen = () => {
+  const layers = useLayers();
+
+  const openModal = () => {
+    layers.add({ id: "_modal", component: ModalComponent, props: {} });
+  };
+
+  return (
+    <View>
+      <Button title={"Open modal"} onPress={openModal}/>
+    </View>
+  );
+}
+
+export default ExampleScreen;
 ```
