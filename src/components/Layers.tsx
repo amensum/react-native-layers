@@ -1,5 +1,4 @@
 import React from "react";
-import produce from "immer";
 import ContextInst from "../context";
 import { LayersComponent, LayerElement, LayersContext } from "../types";
 
@@ -17,22 +16,14 @@ const Layers: LayersComponent<any> = ({ children }) => {
   const context: LayersContext = React.useMemo(() => ({
     list,
     add: (layerConfig) => {
-      setList(
-        produce(draft => {
-          draft.push(layerConfig);
-        }),
-      );
+      setList(state => {
+        return [...state, layerConfig];
+      });
     },
     del: (id) => {
-      setList(
-        produce(draft => {
-          const index = draft.findIndex(layer => layer.id === id);
-
-          if (index > -1) {
-            draft.splice(index);
-          }
-        }),
-      );
+      setList(state => {
+        return state.filter(config => config.id !== id);
+      });
     },
   }), [list, setList]);
 
