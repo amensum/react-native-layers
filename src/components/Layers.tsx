@@ -1,40 +1,47 @@
 import React from "react";
 import produce from "immer";
 import ContextInst from "../context";
-import { LayersContext, LayersRenderer } from "../types";
+import { LayersComponent, LayerElement, LayersContext } from "../types";
 
-const Layers: LayersRenderer = ({ children }) => {
-  const [layersList, setLayersList] = React.useState(children);
+const Layers: LayersComponent<any> = ({ children }) => {
+  const [list, setList] = React.useState(() => {
+    const casted = children as LayerElement | LayerElement[];
+
+    if (Array.isArray(casted)) {
+      return casted.map(el => el.props);
+    }
+
+    return [casted.props];
+  });
 
   const context: LayersContext = React.useMemo(() => ({
-    list: layersList,
-    add: (layerId, layer) => {
-      setLayersList(
+    list,
+    add: (layerConfig) => {
+      setList(
         produce(draft => {
-          draft[layerId] = layer;
+          draft.push(layerConfig);
         }),
       );
     },
-    del: (layerId) => {
-      setLayersList(
+    del: (id) => {
+      setList(
         produce(draft => {
-          delete draft[layerId];
+          const index = draft.findIndex(layer => layer.id === id);
+
+          if (index > -1) {
+            draft.splice(index);
+          }
         }),
       );
     },
-  }), [layersList, setLayersList]);
+  }), [list, setList]);
 
   return (
     <ContextInst.Provider value={context}>
       {
-        Object
-          .keys(layersList)
-          .map(layerId => {
-            const Component = layersList[layerId][0];
-            const props = layersList[layerId][1];
-
-            return <Component key={layerId} {...props} />;
-          })
+        list.map(Layer => (
+          <Layer.component key={Layer.id} {...Layer.props} />
+        ))
       }
     </ContextInst.Provider>
   );

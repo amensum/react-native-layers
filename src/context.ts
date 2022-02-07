@@ -2,7 +2,7 @@ import { createContext } from "react";
 import { LayersContext } from "./types";
 
 const defaultContext: LayersContext = {
-  list: {},
+  list: [],
   add: () => {},
   del: () => {},
 };
